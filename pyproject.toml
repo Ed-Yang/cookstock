@@ -16,6 +16,8 @@ dependencies = [
     "appdirs>=1.4.4",
     "pandas>=2.0.3",
     "pydantic>=2.11.3",
+    "pre-commit>=4.2.0",
+    "tabulate>=0.9.0",
 ]
 requires-python = ">=3.9"
 
@@ -24,4 +26,5 @@ requires = ["setuptools>=61.0"]
 build-backend = "setuptools.build_meta"
 
 [project.scripts]
-cook = "batch:cookStockPipeline"
+twcook = "batch:tw_run"
+

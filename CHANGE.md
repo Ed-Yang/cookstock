@@ -8,7 +8,9 @@ uv sync
 
 ## Done
 
-* add run.py for taiwan stocks
+* draw support, pressure line
+* complete tse, otc, oes
+* add tw_run.py for taiwan stocks
 * add shortname in result json file
 * get_tickers_filtered
     - remove SPWR

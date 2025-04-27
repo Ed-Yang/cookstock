@@ -11,6 +11,7 @@ import datetime as dt
 import os.path
 from time import sleep
 import sys
+from typing import Dict, Any
 
 import matplotlib.pyplot as plt
 
@@ -729,20 +730,26 @@ class cookFinancials(YahooFinancials):
         # All criteria met, return True for a strong buy signal
         return s
 
-
+    def get_company_name(self, ticker):
+        name = self.get_stock_quote_type_data()[ticker]["shortName"]
+        return name if name else 'NA'
 
 class batch_process:
     tickers = []
     resultsPath = ''
     result_file = ''
     
-    def __init__(self, tickers, sectors):
+    def __init__(self, tickers, sectors, writeToFile=True):
+        self.writeToFile = writeToFile
         self.tickers = tickers
         basePath = find_path()
         current_date = dt.date.today().strftime('%Y-%m-%d')
-        self.resultsPath = os.path.join(basePath, 'results', current_date)
-        file = sectors + '.json'
-        self.result_file = setup_result_file(self.resultsPath, file)
+        if writeToFile:
+            self.resultsPath = os.path.join(basePath, 'results', current_date)
+            file = sectors + '.json'
+            self.result_file = setup_result_file(self.resultsPath, file)
+        else:
+            self.result_file =""
             
     def batch_strategy(self):
         superStock=[]
@@ -765,8 +772,9 @@ class batch_process:
                 #if s1==1 and s2==1 and s3==1:
                 if s1==1 and s3==1 and s2:
                     print("congrats, this stock passes all strategys, run volatility contraction pattern")
-                    superStock.append(self.tickers[i])    
-                append_to_json(self.result_file, self.tickers[i])
+                    superStock.append(self.tickers[i])
+                if self.writeToFile:
+                    append_to_json(self.result_file, self.tickers[i])
             except Exception:
                 print("error!")
                 pass
@@ -774,6 +782,7 @@ class batch_process:
             
     def batch_pipeline_full(self):
         superStock=[]
+        result_dict: Dict[str, Any] = {}
         date_from = (dt.date.today() - dt.timedelta(days=100))
         date_to = (dt.date.today())
         for i in range(np.size(self.tickers)):
@@ -796,7 +805,7 @@ class batch_process:
                         volume.append(sp[i]['volume'])
                     # create figure and axis objects with subplots()
                     fig,ax = plt.subplots(2)
-                    short_name = x.get_stock_quote_type_data()[ticker]["shortName"]
+                    short_name = x.get_company_name(ticker)
                     fig.suptitle(f"{x.ticker}({short_name})")
                     # make a plot
                     ax[0].plot(date, price, color="blue", marker="o")
@@ -857,7 +866,8 @@ class batch_process:
                                 'is_demand_dry': str(isDemandDry)
                                 }
                             }    
-
+                        result_dict = result_dict | ticker_data
+                        
                         for ind, item in enumerate(date):
                             if item == startDate:
                                 print(ind)
@@ -880,6 +890,10 @@ class batch_process:
                         x_axis = np.array(x_axis)
                         yRecent = slopeRecet*x_axis-slopeRecet*ind + volume_re[0]
                         ax[1].plot(np.asarray(date)[x_axis], yRecent/10**6, color="red",linewidth=4)
+
+                        ax[0].hlines(pressurePrice, xmin=date[0], xmax=date[-1], color="red")
+                        ax[0].hlines(supportPrice, xmin=date[0], xmax=date[-1], color="green")
+
                         fig.show()
                         
                         figName = os.path.join(self.resultsPath, ticker+'.jpg')
@@ -891,12 +905,13 @@ class batch_process:
                                         bbox_inches='tight')
                             #add link to the json file
                             ticker_data[ticker]['fig'] = figName
-                            
-                        append_to_json(self.result_file, ticker_data)
+                        if self.writeToFile:
+                            append_to_json(self.result_file, ticker_data)
             except Exception:
-                print("error!")
+                print(f"error! ticker: {ticker}")
                 pass
 
+        return result_dict
             
     def batch_financial(self):       
         for i in range(np.size(self.tickers)):
