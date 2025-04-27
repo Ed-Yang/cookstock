@@ -1,0 +1,64 @@
+0.1   10/13/2017 -- Initial release.
+0.2   10/20/2017 -- Added New Methods and Restructured Module Classes
+0.3   10/25/2017 -- Added New Methods and Calculated Measures
+0.4   03/06/2018 -- Fixed reported bug on line 470 of init.py by adding a try and except with suggested line of code.
+0.6   07/06/2018 -- Fixed reported bug in format_date function.
+0.6   07/06/2018 -- Added exception handler that returns a ticker with no available data with a null value.
+0.7   08/03/2018 -- Merged Slyvandb's improvements into the master branch.
+0.7   08/03/2018 -- Added a try catch at line 465 to explicitly type cast the dict keys to a list if the initial attempt fails.
+0.7   08/03/2018 -- Added 10 new income statement history methods beginning at line 567.
+0.7   08/03/2018 -- Added a fix for trevorwelch's open issue involving the unnecessary sys.exit(1) on line 286 by replacing it with return None.
+0.8   08/11/2018 -- Added a new method to get the current day's shares outstanding called get_num_shares_outstanding() starting on line 617.
+0.9   08/14/2018 -- Added a new method called get_historical_price_data() to get price data for commodity futures, indexes, currencies, and cryptos in addition to stocks.
+0.9   08/14/2018 -- Depreciated the get_historical_stock_data() method and scheduled it's removal for version 1.0.
+0.10  08/14/2018 -- Added a new Method to get summary data for stocks, indexes, cryptocurrencies, currencies, and commodity futures, get_summary_data().
+0.10  08/14/2018 -- Depreciated the get_stock_summary_data() method and scheduled it's removal for version 1.0.
+1.0   08/22/2018 -- Removed the get_historical_stock_data() method.
+1.0   08/22/2018 -- Removed the get_stock_summary_data() method.
+1.0   08/22/2018 -- Removed the requests dependency and replaced it with urllib.
+1.0   08/22/2018 -- Updated README.md to README.rst
+1.1   08/23/2018 -- Fixed net income python 3 error
+1.2   08/29/2018 -- Fixed timezone error in python testing. Issue #11.
+1.2   08/29/2018 -- Fixed unicode formatted_date string for consistency.
+1.3   10/25/2018 -- Added patch for reported bug described in Issue #14.
+1.4   01/13/2019 -- Python3.7 support added.
+1.4   01/13/2019 -- Added patch for reported bug described in Issue #15.
+1.4   01/13/2019 -- Added method for get_stock_earnings_data().
+1.5   01/27/2019 -- Added get_daily_dividend_data() method as request in Issue #20.
+1.5   01/27/2019 -- Added test_yf_dividend_price() unit testing method.
+1.6   10/18/2020 -- Merged in two pull requests with bug fixes from sylvandb.
+1.7   01/01/2023 -- Merged in pull request with fixes from sedwards2000.
+1.7   01/01/2023 -- Support for Python 2.7 dropped.
+1.8   01/09/2023 -- Improved decryption support.
+1.9   01/14/2023 -- Added official Python 3.11 support.
+1.9   01/14/2023 -- General code cleanup & quality improvements.
+1.9   01/14/2023 -- Added new optional concurrent input to YahooFinancials(), if True extraction will run async.
+1.9   01/14/2023 -- Added new optional country input to YahooFinancials(), currently supports language & region.
+1.9   01/14/2023 -- Added new optional proxies input to YahooFinancials(), currently supports a list or string.
+1.9   01/14/2023 -- Updated beautifulsoup4 find to use string parameter instead deprecated text parameter.
+1.9   01/14/2023 -- Replace urllib with Requests due to deprecation warning.
+1.9   01/14/2023 -- Merged in pull request from shaunpatterson.
+1.9   01/14/2023 -- Merged in pull request from flipdazed.
+1.9   01/14/2023 -- Fixed new data encryption issue & hardened.
+1.10  01/25/2023 -- Fixed new decryption issue.
+1.11  01/26/2023 -- Added a dynamic fix for the decryption issue.
+1.12  01/27/2023 -- Fixed get profile function for #127 and added additional unit test.
+1.13  02/14/2023 -- Implemented fixes for #132 and #128 by refactoring package to use Yahoo API instead of scraping.
+1.13  02/14/2023 -- Added method to retrieve ESG data as requested in #48.
+1.13  02/14/2023 -- Added additional unit tests.
+1.14  02/21/2023 -- Fixed get_ten_day_avg_daily_volume as reported in #137.
+1.14  02/21/2023 -- Removed get_three_month_avg_daily_volume due to value now missing in Yahoo data.
+1.14  02/21/2023 -- Added unit test for get_ten_day_avg_daily_volume.
+1.15  06/21/2023 -- Dropped Python 3.6 support.
+1.15  06/21/2023 -- Enhanced cache to cover all api requests.
+1.15  06/21/2023 -- Enhanced api url to better toggle between query1 and query2 subdomains.
+1.15  06/21/2023 -- Minimized sleeps in between 400 errors to less than 10 seconds.
+1.16  07/17/2023 -- Minor code cleanup in test_yahoofinancials.py.
+1.16  07/17/2023 -- Fixed HTTP 401 error when executing get_current_price() as reported in #152.
+1.17  10/30/2023 -- Added a fix for 404 error reported in #157.
+1.18  12/09/2023 -- Merged in branch from shaunpatterson to fix #164.
+1.19  12/12/2023 -- Refactored session management system to handle cookie and crumbs better.
+1.19  12/12/2023 -- Added fixes for #167, #166, #160.
+1.20  12/16/2023 -- Merged in pull request #171 from bjosun.
+1.20  12/17/2023 -- Added optional flat format output param on YahooFinancial class.
+1.20  12/17/2023 -- Added get_insight() and get_recommendations() methods.
