@@ -6,7 +6,7 @@ from tabulate import tabulate
 from cookStock import batch_process
 from tw_exchange import TwExchange
 
-def main(code_list=[], sectorNameStr="TaiwanStock"):
+def main(code_list=[], sectorNameStr="TaiwanStock", writeToFile=False):
     
     exchange = TwExchange()
     if code_list:
@@ -43,8 +43,12 @@ if __name__ == "__main__":
         default=[],
         help="the name of symbol in yahoo format, e.g. 2330.TW",
     )
+    parser.add_argument(
+        "--write",
+        action="store_true",
+        help="write to json file")
 
     args = parser.parse_args()
     
-    main(code_list=args.code)
+    main(code_list=args.code, writeToFile=args.write)
     print("Done.")
