@@ -3,3 +3,8 @@ proxy.txt
 update_results.sh
 cronjob.log
 crontab.log
+
+__pycache__/
+.vscode/
+src/your_project_name.egg-info/
+*.pyc
