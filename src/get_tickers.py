@@ -106,7 +106,9 @@ def get_tickers_filtered(mktcap_min=None, mktcap_max=None, sectors=None):
     for exchange in _EXCHANGE_LIST:
         tickers_list.extend(
             __exchange2list_filtered(exchange, mktcap_min=mktcap_min, mktcap_max=mktcap_max, sectors=sectors))
-    return tickers_list
+    tickers_list = list(set(tickers_list))  # remove duplicates
+    tickers_list.remove("SPWR") # edw
+    return sorted(tickers_list)
 
 
 def get_biggest_n_tickers(top_n, sectors=None):

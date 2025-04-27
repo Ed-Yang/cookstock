@@ -1,8 +1,9 @@
+#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
+
 ###a high level script to run the whole pipeline
 # runBatch_cookStock_stage2template.py
 # get super stocks
-#!/usr/bin/env python3
-# -*- coding: utf-8 -*-
 """
 Created on Tuesday 11/12/2024
 
@@ -45,9 +46,9 @@ current_date = dt.date.today().strftime("%m_%d_%Y")
 #set sector names to be run
 # sectorCollection = [SectorConstants.TECH, SectorConstants.HEALTH_CARE, SectorConstants.BASICS, SectorConstants.SERVICES, SectorConstants.FINANCE, SectorConstants.ENERGY, SectorConstants.NON_DURABLE_GOODS, SectorConstants.DURABLE_GOODS]
 
-sectorCollection = [SectorConstants.TECH, SectorConstants.HEALTH_CARE,SectorConstants.FINANCE, SectorConstants.ENERGY]
+# sectorCollection = [SectorConstants.TECH, SectorConstants.HEALTH_CARE,SectorConstants.FINANCE, SectorConstants.ENERGY]
 
-# sectorCollection = [SectorConstants.TECH]
+sectorCollection = [SectorConstants.TECH]
 
 sectorName = []
 selected = [] 

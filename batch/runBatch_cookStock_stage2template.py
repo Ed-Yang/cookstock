@@ -60,7 +60,7 @@ for sector in sectorCollection:
     for i in filtered_by_sector: 
         if i not in selected: 
             selected.append(i) 
-    file = sector + '_superStocks_' + current_date + '.json'
+    file = sector + '_superStocks_' + current_date
     print('start processing ' + sector)
     y = batch_process(selected, file)
     y.batch_strategy()

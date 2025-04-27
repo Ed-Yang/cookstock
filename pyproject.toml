@@ -1,0 +1,26 @@
+[project]
+name = "cookstock"
+version = "0.1.0"
+description = "A short description of your project"
+authors = [
+    { name = "Your Name", email = "you@example.com" }
+]
+dependencies = [
+    "requests",
+    "numpy",
+    "matplotlib>=3.7.5",
+    "pytz>=2025.2",
+    "bs4>=0.0.2",
+    "frozendict>=2.4.6",
+    "peewee>=3.17.9",
+    "appdirs>=1.4.4",
+    "pandas>=2.0.3",
+]
+requires-python = ">=3.9"
+
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+[project.scripts]
+cook = "batch:cookStockPipeline"

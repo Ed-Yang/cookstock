@@ -6,5 +6,7 @@ crontab.log
 
 __pycache__/
 .vscode/
+src/cookstock.egg-info/
 src/your_project_name.egg-info/
 *.pyc
+results/

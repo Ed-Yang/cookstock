@@ -370,6 +370,9 @@ class _CookieCache:
         try:
             data = _CookieSchema.get(_CookieSchema.strategy == strategy)
             cookie = _pkl.loads(data.cookie_bytes)
+            if type(data.fetch_date) is not _datetime.datetime: # edw
+                data.fetch_date = _datetime.datetime.strptime(
+                    data.fetch_date, "%Y-%m-%dT%H:%M:%S.%f")
             return {'cookie': cookie, 'age': _datetime.datetime.now() - data.fetch_date}
         except _CookieSchema.DoesNotExist:
             return None
