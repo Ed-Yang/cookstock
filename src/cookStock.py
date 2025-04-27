@@ -534,7 +534,7 @@ class cookFinancials(YahooFinancials):
             if counter >= counterThr or i == numOfDate-1:
                 #get local high
                 print('find the local highest price')
-                print(localHighestPrice)
+                print(round(localHighestPrice, 2))
                 print('date is')
                 print(localHighestDate)
                 break
@@ -625,9 +625,9 @@ class cookFinancials(YahooFinancials):
             current = self.current_stickerPrice
         flag = (self.m_footPrint[-1][2] <= algoParas.PIVOT_PRICE_PERC) and (current> self.m_recordVCP[-1][3])
         #report support and pressure
-        print(self.ticker + ' current price: ' + str(current))
-        print(self.ticker + ' support price: ' + str(self.m_recordVCP[-1][3]))
-        print(self.ticker + ' pressure price: ' + str(self.m_recordVCP[-1][1]))
+        print(self.ticker + ' current price: ' + str(round(current, 2)))
+        print(self.ticker + ' support price: ' + str(round(self.m_recordVCP[-1][3], 2)))
+        print(self.ticker + ' pressure price: ' + str(round(self.m_recordVCP[-1][1], 2)))
         return flag, current, self.m_recordVCP[-1][3], self.m_recordVCP[-1][1]
     
     def is_correction_deep(self):
@@ -796,7 +796,8 @@ class batch_process:
                         volume.append(sp[i]['volume'])
                     # create figure and axis objects with subplots()
                     fig,ax = plt.subplots(2)
-                    fig.suptitle(x.ticker)
+                    short_name = x.get_stock_quote_type_data()[ticker]["shortName"]
+                    fig.suptitle(f"{x.ticker}({short_name})")
                     # make a plot
                     ax[0].plot(date, price, color="blue", marker="o")
                     # set x-axis label
@@ -845,8 +846,17 @@ class batch_process:
                         isDemandDry, startDate, endDate, volume_ls, slope, interY, recentStart, recentEnd, volume_re, slopeRecet, interYRecent = x.is_demand_dry()
                         print(isDemandDry)
     
-                        ticker_data = {ticker:{'current price':str(currentPrice), 'support price':str(supportPrice), 'pressure price':str(pressurePrice), \
-                                    'is_good_pivot':str(isGoodPivot), 'is_deep_correction':str(isDeepCor), 'is_demand_dry': str(isDemandDry)}}    
+                        ticker_data = {
+                            ticker: {
+                                "short name": short_name,
+                                'current price':str(currentPrice),
+                                'support price':str(supportPrice),
+                                'pressure price':str(pressurePrice),
+                                'is_good_pivot':str(isGoodPivot),
+                                'is_deep_correction':str(isDeepCor),
+                                'is_demand_dry': str(isDemandDry)
+                                }
+                            }    
 
                         for ind, item in enumerate(date):
                             if item == startDate:

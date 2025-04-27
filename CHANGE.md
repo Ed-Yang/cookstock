@@ -6,9 +6,10 @@
 
 uv sync
 
-
 ## Done
 
+* add run.py for taiwan stocks
+* add shortname in result json file
 * get_tickers_filtered
     - remove SPWR
     - use set to remove duplicate tickers
