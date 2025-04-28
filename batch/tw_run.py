@@ -16,7 +16,7 @@ def main(code_list=[], sectorNameStr="TaiwanStock", writeToFile=False):
         selected = exchange.get_symbol_list()
         
     print(f"Toatal {len(selected)} tickers.")
-    y = batch_process(selected, sectorNameStr, writeToFile=False)
+    y = batch_process(selected, sectorNameStr, writeToFile=writeToFile)
     result_dict = y.batch_pipeline_full()
 
     for k, v in result_dict.items():
@@ -46,6 +46,7 @@ if __name__ == "__main__":
     parser.add_argument(
         "--write",
         action="store_true",
+        default=False,
         help="write to json file")
 
     args = parser.parse_args()
